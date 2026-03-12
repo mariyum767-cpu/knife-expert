@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KnifeXpert | Products</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Add this inside <head> section of your HTML file -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Tailwind CSS CDN for modal & utility classes -->
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+</head>
+<body>
+
+ <header class="site-header">
+  <div class="container header-container">
+    <h1 class="logo">🔪 KnifeXpert</h1>
+    <nav class="main-nav" id="navbar">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="products.html" class="active">Products</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="cart.html">Cart</a></li>
+
+      </ul>
+    </nav>
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+
+  <main>
+    <section class="products">
+  <div class="container">
+    <h2 class="section-title">Our Premium Knives</h2>
+
+     <!-- Search Bar -->
+  <input
+      type="text"
+      id="search-input"
+      placeholder="🔍 Search products..."
+      class="search-bar"
+    />
+
+<div class="product-grid">
+
+  <!-- Kitchen Knife -->
+  <div class="card product-card">
+    <div class="product-image-wrapper">
+      <img src="images/Kitchen Knife.jpg" alt="Kitchen Knife" />
+      <div class="product-icons">
+    <button class="icon-btn" title="Add to Cart"
+        onClick="addToCart('Kitchen Knife', 35, 'images/Kitchen Knife.jpg', 'Perfect for slicing & dicing.')">
+    🛒
+</button>
+
+<button class="icon-btn text-gray-500 hover:text-blue-500 transition text-xl"
+  title="Quick View"
+  data-name="Kitchen Knife"
+  data-price="35"
+  data-image="images/Kitchen Knife.jpg"
+  data-description="Perfect for slicing & dicing."
+  onclick="openQuickViewFromButton(this)">🔍</button>
+
+  <button class="icon-btn text-gray-500 hover:text-red-500 transition text-xl"
+  title="Add to Wishlist"
+  data-name="Kitchen Knife"
+  data-price="35"
+  data-image="images/Kitchen Knife.jpg"
+  data-description="Perfect for slicing & dicing."
+  onclick="addToWishlistFromButton(this)">❤️</button>
+ </div>
+    </div>
+    <h3>Kitchen Knife</h3>
+    <p>Perfect for slicing & dicing with precision.</p>
+    <p class="price">Price: $35</p>
+    <p class="quantity">In Stock: 50 pcs</p>
+    <p class="discount">Discount: 10%</p>
+    <div class="product-buttons">
+      <button class="btn buy-now" 
+        onClick="window.location.href='Checkout.html'">
+  Buy Now
+</button>
+ 
+<!-- For Kitchen Knife (add this one in product-detail.js too later) -->
+<button class="btn view-details" 
+        onclick="window.location.href='product-detail.html?id=kitchen'">View Details</button>
+    </div>
+  </div>
+
+  <!-- Chef's Knife -->
+  <div class="card product-card">
+    <div class="product-image-wrapper">
+      <img src="images/chef knife.jpg" alt="Chef Knife" />
+      <div class="product-icons">
+<button class="icon-btn" title="Add to Cart"
+        onClick="addToCart('Chef Knife', 35, 'images/chef knife.jpg', 'Perfect for slicing & dicing with precision.')">
+    🛒
+</button>
+
+
+
+<button class="icon-btn text-gray-500 hover:text-blue-500 transition text-xl"
+  title="Quick View"
+  data-name="Chef Knife"
+  data-price="35"
+  data-image="images/chef knife.jpg"
+  data-description="Perfect for slicing & dicing with precision."
+  onclick="openQuickViewFromButton(this)">🔍</button>
+
+
+<button class="icon-btn text-gray-500 hover:text-red-500 transition text-xl"
+  title="Add to Wishlist"
+  data-name="Chef Knife"
+  data-price="35"
+  data-image="images/chef knife.jpg"
+  data-description="Perfect for slicing & dicing with precision."
+  onclick="addToWishlistFromButton(this)">❤️</button>
+
+
+      </div>
+    </div>
+    <h3>Chef Knife</h3>
+    <p>Perfect for slicing & dicing with precision.</p>
+    <p class="price">Price: $35</p>
+    <p class="quantity">In Stock: 50 pcs</p>
+    <p class="discount">Discount: 10%</p>
+    <div class="product-buttons">
+      <button class="btn buy-now" 
+        onClick="window.location.href='Checkout.html'">
+  Buy Now
+</button>
+
+      <!-- For Chef Knife  view button-->
+<button class="btn view-details" 
+        onclick="window.location.href='product-detail.html?id=chef'">View Details</button>
+    </div>
+  </div>
+
+  <!-- Butcher Knife -->
+  <div class="card product-card">
+    <div class="product-image-wrapper">
+      <img src="images/butcher knife.jpg" alt="Butcher Knife" />
+      <div class="product-icons">
+        <button class="icon-btn" title="Add to Cart"
+        onClick="addToCart('Butcher Knife', 40, 'images/butcher knife.jpg', 'Heavy-duty cleaver for meat processing.')">
+    🛒
+</button>
+
+<button class="icon-btn text-gray-500 hover:text-blue-500 transition text-xl"
+  title="Quick View"
+  data-name="Butcher Knife"
+  data-price="40"
+  data-image="images/butcher knife.jpg"
+  data-description="Heavy-duty cleaver for meat processing."
+  onclick="openQuickViewFromButton(this)">🔍</button>
+
+  <!-- Add to Wishlist -->
+      <button class="icon-btn text-gray-500 hover:text-red-500 transition text-xl" title="Add to Wishlist"
+        data-name="Butcher Knife"
+        data-price="40"
+        data-image="images/butcher knife.jpg"
+        data-description="Heavy-duty cleaver for meat processing."
+        onclick="addToWishlistFromButton(this)">❤️</button>
+   </div>
+    </div>
+    <h3>Butcher Knife</h3>
+    <p>Heavy-duty cleaver for meat processing.</p>
+    <p class="price">Price: $40</p>
+    <p class="quantity">In Stock: 75 pcs</p>
+    <p class="discount">Discount: 20%</p>
+    <div class="product-buttons">
+      <button class="btn buy-now" 
+        onClick="window.location.href='Checkout.html'">
+  Buy Now
+</button>
+<!-- For Butcher Knife -->
+<button class="btn view-details" 
+        onclick="window.location.href='product-detail.html?id=butcher'">View Details</button>
+
+  </div>
+  </div>
+
+  <!-- Boning Knife -->
+  <div class="card product-card">
+    <div class="product-image-wrapper">
+      <img src="images/boning knife.jpg" alt="Boning Knife" />
+      <div class="product-icons">
+  <button class="icon-btn" title="Add to Cart"
+        onClick="addToCart('Boning Knife', 30, 'images/boning knife.jpg', 'Flexible blade for meat and fish deboning.')">
+    🛒
+</button>
+
+   <button class="icon-btn text-gray-500 hover:text-blue-500 transition text-xl"
+  title="Quick View"
+  data-name="Boning Knife"
+  data-price="30"
+  data-image="images/boning knife.jpg"
+  data-description="Flexible blade for meat and fish deboning."
+  onclick="openQuickViewFromButton(this)">🔍</button>
+
+  <button class="icon-btn text-gray-500 hover:text-red-500 transition text-xl"
+  title="Add to Wishlist"
+  data-name="Boning Knife"
+  data-price="30"
+  data-image="images/boning knife.jpg"
+  data-description="Flexible blade for meat and fish deboning."
+  onclick="addToWishlistFromButton(this)">❤️</button>
+
+              </div>
+    </div>
+    <h3>Boning Knife</h3>
+    <p>Flexible blade for meat and fish deboning.</p>
+    <p class="price">Price: $30</p>
+    <p class="quantity">In Stock: 60 pcs</p>
+    <p class="discount">Discount: 5%</p>
+    <div class="product-buttons">
+  <button class="btn buy-now" 
+        onClick="window.location.href='Checkout.html'">
+  Buy Now
+</button>
+
+     <!-- For Boning Knife -->
+<button class="btn view-details" 
+        onclick="window.location.href='product-detail.html?id=boning'">View Details</button>
+
+    </div>
+  </div>
+
+  <!-- Hunting Knife -->
+  <div class="card product-card">
+    <div class="product-image-wrapper">
+      <img src="images/hunting knife.jpg" alt="Hunting Knife" />
+      <div class="product-icons">
+        <button class="icon-btn" title="Add to Cart"
+        onClick="addToCart('Hunting Knife', 50, 'images/hunting knife.jpg', 'Perfect for skinning and outdoor activities.')">
+    🛒
+</button>
+
+    <button class="icon-btn text-gray-500 hover:text-blue-500 transition text-xl"
+  title="Quick View"
+  data-name="Hunting Knife"
+  data-price="50"
+  data-image="images/hunting knife.jpg"
+  data-description="Perfect for skinning and outdoor activities."
+  onclick="openQuickViewFromButton(this)">🔍</button>
+
+  <button class="icon-btn text-gray-500 hover:text-red-500 transition text-xl"
+  title="Add to Wishlist"
+  data-name="Hunting Knife"
+  data-price="50"
+  data-image="images/hunting knife.jpg"
+  data-description="Perfect for skinning and outdoor activities."
+  onclick="addToWishlistFromButton(this)">❤️</button>
+
+  </div>
+    </div>
+    <h3>Hunting Knife</h3>
+    <p>Perfect for skinning and outdoor activities.</p>
+    <p class="price">Price: $50</p>
+    <p class="quantity">In Stock: 40 pcs</p>
+    <p class="discount">Discount: 15%</p>
+    <div class="product-buttons">
+
+ <button class="btn buy-now" 
+        onClick="window.location.href='Checkout.html'">
+  Buy Now
+</button>
+
+
+
+      <!-- For hunting Knife -->
+<button class="btn view-details" 
+        onclick="window.location.href='product-detail.html?id=hunting'">View Details</button>
+
+  </div>
+  </div>
+
+  <!-- Camping Knife -->
+  <div class="card product-card">
+    <div class="product-image-wrapper">
+      <img src="images/camping knife.jpg" alt="Camping Knife" />
+      <div class="product-icons">
+        <button class="icon-btn" title="Add to Cart"
+        onClick="addToCart('Camping Knife', 28, 'images/camping knife.jpg', 'Reliable companion for survival and camping.')">
+    🛒
+</button>
+
+    <button class="icon-btn text-gray-500 hover:text-blue-500 transition text-xl"
+  title="Quick View"
+  data-name="Camping Knife"
+  data-price="28"
+  data-image="images/camping knife.jpg"
+  data-description="Reliable companion for survival and camping."
+  onclick="openQuickViewFromButton(this)">🔍</button>
+
+  <button class="icon-btn text-gray-500 hover:text-red-500 transition text-xl"
+  title="Add to Wishlist"
+  data-name="Camping Knife"
+  data-price="28"
+  data-image="images/camping knife.jpg"
+  data-description="Reliable companion for survival and camping."
+  onclick="addToWishlistFromButton(this)">❤️</button>
+
+              </div>
+    </div>
+    <h3>Camping Knife</h3>
+    <p>Reliable companion for survival and camping.</p>
+    <p class="price">Price: $28</p>
+    <p class="quantity">In Stock: 65 pcs</p>
+    <p class="discount">Discount: 10%</p>
+    <div class="product-buttons">
+      <button class="btn buy-now" 
+        onClick="window.location.href='Checkout.html'">
+  Buy Now
+</button>
+
+<!-- For Camping Knife -->
+<button class="btn view-details" 
+ onclick="window.location.href='product-detail.html?id=camping'">View Details</button>
+
+    
+            </div>
+  </div>
+
+  <!-- Tactical Folding Knife -->
+  <div class="card product-card">
+<div class="product-image-wrapper">
+<img src="images/tactical knife.jpg" alt="Tactical Folding Knife" />
+<div class="product-icons">
+ <button class="icon-btn" title="Add to Cart"
+onClick="addToCart('Tactical Folding Knife',45 , 'images/tactical knife.jpg', 'Compact, durable knife for self-defense and EDC.')">
+    🛒
+</button>
+
+
+<button class="icon-btn text-gray-500 hover:text-blue-500 transition text-xl"
+  title="Quick View"
+  data-name="Tactical Folding Knife"
+  data-price="45"
+  data-image="images/tactical knife.jpg"
+  data-description="Compact, durable knife for self-defense and EDC."
+  onclick="openQuickViewFromButton(this)">🔍</button>
+
+
+<button class="icon-btn text-gray-500 hover:text-red-500 transition text-xl"
+  title="Add to Wishlist"
+  data-name="Tactical Folding Knife"
+  data-price="45"
+  data-image="images/tactical knife.jpg"
+  data-description="Compact, durable knife for self-defense and EDC."
+  onclick="addToWishlistFromButton(this)">❤️</button>
+
+              </div>
+    </div>
+    <h3>Tactical Folding Knife</h3>
+    <p>Compact, durable knife for self-defense and EDC.</p>
+    <p class="price">Price: $45</p>
+    <p class="quantity">In Stock: 35 pcs</p>
+    <p class="discount">Discount: 25%</p>
+    <div class="product-buttons">
+      <button class="btn buy-now" 
+        onClick="window.location.href='Checkout.html'">
+  Buy Now
+</button>
+
+  <!-- For tacticak Knife -->
+<button class="btn view-details" 
+        onclick="window.location.href='product-detail.html?id=tactical'">View Details</button>
+    </div>
+  </div>
+
+</div> <!-- END PRODUCT GRID -->
+
+
+
+    </section>
+  </main>
+
+ <footer>
+  <div class="footer-content">
+    
+    <!-- Contact Section -->
+    <div class="footer-section footer-contact">
+      <h4>Contact Us</h4>
+      <p>Email: <a href="mailto:contact@knifexpert.com">contact@knifexpert.com</a></p>
+      <p>Phone: +1 234 567 8900</p>
+    </div>
+
+    <!-- Social Media Links -->
+    <div class="footer-section footer-social">
+      <h4>Follow Us</h4>
+      <a href="#" aria-label="Facebook" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+      <a href="#" aria-label="Twitter" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+      <a href="#" aria-label="Instagram" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="LinkedIn" class="social-icon linkedin"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+
+  </div>
+
+  <!-- Footer Bottom Sections -->
+  <div class="footer-bottom">
+
+    <!-- Policies Section -->
+    <div class="footer-section footer-policies">
+      <h4>Policies</h4>
+      <ul>
+        <li><a href="refund-policy.html">Refund Policy</a></li>
+          <li><a href="warranty-policy.html">Warranty Policy</a></li>
+          <li><a href="privacy-policy.html">Payment and Privacy Policy</a></li>
+          <li><a href="terms.html">Terms and Conditions</a></li>
+      </ul>
+    </div>
+
+    <!-- Customer Service Section -->
+    <div class="footer-section footer-customer-service">
+      <h4>Customer Service</h4>
+      <ul>
+         <li><a href="faq.html">FAQ</a></li>
+    <li><a href="track-order.html">Track Order</a></li>
+    <li><a href="blogs.html">Blogs</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- Copyright -->
+  <div class="footer-copy">
+    <p>&copy; 2025 <strong>KnifeXpert</strong>. All rights reserved.</p>
+  </div>
+</footer>
+
+
+ <script>
+  function addToCart(name, price, image, description) {
+    const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    const newItem = {
+      name: name,
+      price: price,
+      image: image,
+      description: description,
+    };
+
+    cart.push(newItem);
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert(`${name} added to cart!`);
+  }
+
+  function buyNowHandler(productName, price, image, description) {
+    addToCart(productName, price, image, description);
+    window.location.href =
+      "product-detail.html?product=" + encodeURIComponent(productName);
+  
+  }
+
+  
+  function addToWishlistFromButton(button) {
+  const name = button.getAttribute("data-name");
+  const price = button.getAttribute("data-price");
+  const image = button.getAttribute("data-image");
+  const description = button.getAttribute("data-description");
+
+  let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+  const exists = wishlist.some(item => item.name === name);
+  if (exists) {
+    alert("❗Already in Wishlist!");
+    return;
+  }
+
+  wishlist.push({ name, price, image, description });
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+
+  button.classList.remove("text-gray-500");
+  button.classList.add("text-red-600");
+
+  alert("❤️ Added to Wishlist!");
+}
+
+  
+  function openQuickViewFromButton(button) {
+    const name = button.getAttribute("data-name");
+    const price = button.getAttribute("data-price");
+    const image = button.getAttribute("data-image");
+    const description = button.getAttribute("data-description");
+
+    document.getElementById("quickViewName").textContent = name;
+    document.getElementById("quickViewImage").src = image;
+    document.getElementById("quickViewDesc").textContent = description;
+    document.getElementById("quickViewPrice").textContent = "$" + price;
+
+    document.getElementById("quickViewModal").classList.remove("hidden");
+  }
+
+  function closeQuickView() {
+    document.getElementById("quickViewModal").classList.add("hidden");
+  }
+   function toggleMenu() {
+    const navbar = document.getElementById("navbar");
+    navbar.classList.toggle("active");
+  }
+</script>
+<!-- Quick View Modal -->
+<div id="quickViewModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+  <div class="bg-white rounded-lg p-6 w-96 relative">
+    <button onclick="closeQuickView()" class="absolute top-2 right-2 text-gray-600 hover:text-red-600 text-xl">✖</button>
+    <img id="quickViewImage" src="" alt="Preview" class="w-full h-48 object-cover rounded mb-4" />
+    <h2 id="quickViewName" class="text-xl font-bold mb-2"></h2>
+    <p id="quickViewDesc" class="text-gray-700 mb-2"></p>
+    <p id="quickViewPrice" class="text-green-600 font-semibold"></p>
+  </div>
+</div>
+
+</body>
+</html>

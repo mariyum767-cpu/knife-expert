@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>KnifeXpert - Shopping Cart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Font Awesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    /* Global & Layout */
+    html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background: #ffffff;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+    .main-footer {
+  flex-shrink: 0;
+  background: #111;
+  color: #f9f9f9;
+  padding: 2rem 1rem;
+  margin-top: 9rem; /* ✅ Add this line */
+}
+
+
+    /* Header */
+    .site-header {
+      background: #111;
+      color: #f9f9f9;
+      padding: 1rem;
+    }
+
+    .site-header .logo {
+      font-size: 1.5rem;
+    }
+
+    .site-header nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: flex-end;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+
+    .site-header nav a {
+      color: #ffffffee;
+      text-decoration: none;
+    }
+
+    /* Cart Content */
+    .cart-content {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 2rem auto; /* ✅ Adds margin-top and margin-bottom */
+  background: #fff;
+  border-radius: 8px;
+}
+
+
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 15px 0;
+      padding: 1rem;
+      background: #f9f9f9;
+      border-radius: 8px;
+    }
+
+    .cart-item img {
+      width: 80px;
+      height: 80px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    .cart-item-details {
+      flex: 1;
+      margin-left: 1rem;
+    }
+
+    .cart-item-price {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .cart-total {
+      font-size: 1.25rem;
+      font-weight: bold;
+      text-align: right;
+      margin-top: 1rem;
+    }
+
+    .checkout-button,
+    .clear-button {
+      background: #ff4d4d;
+      color: #fff;
+      font-size: 1rem;
+      padding: 12px 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      border: none;
+      margin: 1rem 0.5rem 0 0;
+    }
+
+    .checkout-button:hover,
+    .clear-button:hover {
+      background: #ff2f2f;
+    }
+
+    .empty-cart {
+      color: red;
+      font-size: 1.25rem;
+      text-align: center;
+      margin: 4rem 0 2rem;
+    }
+
+    /* Footer */
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .footer-column {
+      flex: 1 1 250px;
+      margin: 1rem 0;
+    }
+
+    .footer-column h3 {
+      font-size: 1.25rem;
+      color: #c90707;
+    }
+
+    .footer-column p,
+    .footer-column a {
+      font-size: 0.95rem;
+      color: #f9f9f9;
+      text-decoration: none;
+    }
+
+    .footer-column a:hover {
+      color: #c50a0a;
+    }
+
+    .footer-column i {
+      font-size: 1.5rem;
+      margin-right: 15px;
+    }
+
+    .footer-column .fa-facebook { color: #1877F2; }
+    .footer-column .fa-twitter { color: #1DA1F2; }
+    .footer-column .fa-instagram { color: #E1306C; }
+    .footer-column .fa-linkedin { color: #0077B5; }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 1rem 0;
+      border-top: 1px solid #333;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER START -->
+  <header class="site-header">
+    <div class="container header-container">
+      <h1 class="logo">🔪 KnifeXpert - Shopping Cart</h1>
+      <nav class="main-nav" id="navbar">
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <!-- HEADER END -->
+
+  <!-- CART START -->
+  <main class="cart-content">
+    <h2>Your Shopping Cart</h2>
+    <div id="cartItems"></div>
+    <div class="cart-total" id="cartTotal"></div>
+    <div style="text-align:right;">
+      <button class="clear-button" onclick="clearCart()">Clear Cart</button>
+      <button class="checkout-button" onclick="goToCheckout()">Proceed to Checkout</button>
+    </div>
+  </main>
+  <!-- CART END -->
+
+  <!-- FOOTER START -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3>Contact Us</h3>
+        <p>Email: <a href="mailto:contact@knifexpert.com">contact@knifexpert.com</a></p>
+        <p>Phone: +1 234 567 8900</p>
+      </div>
+      <div class="footer-column">
+        <h3>Policies</h3>
+        <p><a href="#">Refund Policy</a></p>
+        <p><a href="#">Warranty Policy</a></p>
+        <p><a href="#">Privacy Policy</a></p>
+        <p><a href="#">Terms and Conditions</a></p>
+      </div>
+      <div class="footer-column">
+        <h3>Customer Service</h3>
+        <p><a href="#">FAQs</a></p>
+        <p><a href="#">Track Your Order</a></p>
+        <a href="blogs.html">Blogs</a>
+      </div>
+      <div class="footer-column">
+        <h3>Follow Us</h3>
+        <a href="#"><i class="fab fa-facebook"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      &copy; 2025 KnifeXpert. All Rights Reserved.
+    </div>
+  </footer>
+  <!-- FOOTER END -->
+
+  <!-- JAVASCRIPT START -->
+  <script>
+    function loadCart() {
+      const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartItemsContainer = document.getElementById('cartItems');
+      const cartTotalContainer = document.getElementById('cartTotal');
+
+      cartItemsContainer.innerHTML = '';
+      let total = 0;
+
+      if (cartItems.length > 0) {
+        cartItems.forEach(item => {
+          total += item.price;
+          cartItemsContainer.innerHTML += `
+            <div class="cart-item">
+              <img src="${item.image}" alt="${item.name}">
+              <div class="cart-item-details">
+                <strong>${item.name}</strong><br/>
+                <small>${item.description}</small>
+              </div>
+              <div class="cart-item-price">$${item.price.toFixed(2)}</div>
+            </div>`;
+        });
+        cartTotalContainer.innerHTML = `Total: $${total.toFixed(2)}`;
+      } else {
+        cartItemsContainer.innerHTML = '<p class="empty-cart">Your cart is empty. <a href="products.html">Go back and add some products!</a></p>';
+        cartTotalContainer.innerHTML = '';
+      }
+    }
+
+    function goToCheckout() {
+      window.location.href = 'checkout.html';
+    }
+
+    function clearCart() {
+      localStorage.removeItem('cart');
+      loadCart();
+    }
+
+    window.onload = loadCart;
+  </script>
+  <!-- JAVASCRIPT END -->
+
+</body>
+</html>

@@ -21,4 +21,4 @@ including layout design, styling, and DOM manipulation using JavaScript.
 It is part of my portfolio for internships in web development and front-end development.
 
 Live Demo:
-[View Live Website](https://mariyum767-cpu.github.io/knife-expert/)
+[View Live Website](https://mariyum767-cpu.github.io/knife-expert/)](https://mariyum767-cpu.github.io/knife-expert/)

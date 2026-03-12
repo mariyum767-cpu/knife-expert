@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wish List | KnifeXpert</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="bg-white-100 text- black min-h-screen flex flex-col">
+
+  <!-- Header -->
+<header class="bg-black text-white p-4 shadow-md flex justify-between items-center px-6">
+  <!-- Left: Logo -->
+  <div class="flex items-center space-x-3">
+    <h1 class="text-xl font-bold">🔪 KnifeXpert</h1>
+    <span class="text-lg text-gray-300 font-medium">❤️ Wishlist</span>
+  </div>
+
+  <!-- Right: Cart Icon -->
+  <div class="relative">
+    <a href="cart.html" class="relative inline-block">
+      <i class="ph ph-shopping-cart text-white text-2xl"></i>
+<span id="cartCount" class="absolute -top-2 -right-2 bg-red-600 text-white text-xs px-1 rounded-full">0</span>
+    </a>
+  </div>
+</header>
+
+
+  <!-- Wishlist Title -->
+  <section class="text-center mt-6">
+    <h2 class="text-3xl font-bold">❤️ Your Wishlist</h2>
+    <p class="mt-1 text-gray-500">Items you love and want to keep track of</p>
+  </section>
+
+  <!-- Wishlist Items -->
+  <main class="flex-1 max-w-6xl mx-auto p-6">
+    <div id="wishlistContainer" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Wishlist items will be inserted here -->
+    </div>
+    <div id="emptyMsg" class="text-center text-gray-500 mt-10 hidden">
+      <p class="text-lg">📝 Your wishlist is empty.</p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-gray-800 text-white text-center py-4 mt-auto">
+    © 2025 KnifeXpert | <a href="index.html" class="text-blue-400 hover:underline">Home</a>
+  </footer>
+
+  <!-- Wishlist Script -->
+  <script>
+    let wishlistData = JSON.parse(localStorage.getItem("wishlist")) || [];
+    const wishlistContainer = document.getElementById("wishlistContainer");
+    const emptyMsg = document.getElementById("emptyMsg");
+
+    function renderWishlist() {
+      wishlistContainer.innerHTML = "";
+
+      if (wishlistData.length === 0) {
+        emptyMsg.classList.remove("hidden");
+        return;
+      } else {
+        emptyMsg.classList.add("hidden");
+      }
+
+      wishlistData.forEach((item, index) => {
+        const card = document.createElement("div");
+        card.className = "wishlist-card p-4 bg-white rounded-lg shadow";
+
+        card.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="w-full h-48 object-cover rounded mb-4" />
+          <h2 class="text-lg font-bold">${item.name}</h2>
+          <p class="text-gray-600 mb-2">$${item.price}</p>
+          <div class="mt-4 flex justify-between items-center">
+            <button onclick="addToCart(${index})" class="btn-green px-3 py-1 text-white text-sm rounded">Add to Cart</button>
+            <button onclick="removeItem(${index})" class="btn-remove text-sm">Remove ❌</button>
+          </div>
+        `;
+        wishlistContainer.appendChild(card);
+      });
+    }
+
+    function removeItem(index) {
+      wishlistData.splice(index, 1);
+      localStorage.setItem("wishlist", JSON.stringify(wishlistData));
+      renderWishlist();
+      updateCartBadge();
+    }
+
+    function addToCart(index) {
+      const item = wishlistData[index];
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+      const existing = cart.find(p => p.name === item.name);
+      if (existing) {
+        existing.quantity = (existing.quantity || 1) + 1;
+      } else {
+        item.quantity = 1;
+        cart.push(item);
+      }
+
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${item.name} added to cart!`);
+      removeItem(index);
+    }
+
+    function updateCartBadge() {
+      const cartCount = document.getElementById("cartCount");
+      const cart = JSON.parse(localStorage.getItem("cart")) || [];
+      const total = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
+      if (cartCount) cartCount.textContent = total;
+    }
+
+    renderWishlist();
+    updateCartBadge();
+  </script>
+
+</body>
+</html>

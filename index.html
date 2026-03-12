@@ -1,1 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KnifeXpert | Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    rel="stylesheet"
+  />
+</head>
+<body>
 
+ <header class="main-header">
+  <div class="logo">
+    <h1>🔪 KnifeXpert</h1>
+  </div>
+
+  <nav>
+    <ul>
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="about.html">About</a></li>
+      
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <div class="header-right">
+    <input type="text" id="search-input" placeholder="Search products..." />
+
+<a href="wishlist.html" title="Wishlist" aria-label="Wishlist" id="wishlist-btn">
+  <i class="fa-regular fa-heart text-xl text-gray-700 hover:text-red-500 transition"></i>
+</a>
+
+
+
+ <button id="login-btn" title="Login" aria-label="Login" onclick="location.href='login.html'">
+  <i class="fa-solid fa-user"></i>
+</button>
+
+  
+
+
+<a href="cart.html" class="relative inline-flex items-center gap-1 text-white hover:text-yellow-300 text-base font-medium" title="Cart">
+  <span class="text-xl">🛒</span>
+  <span>Cart</span>
+  <span id="cart-count" class="ml-1 inline-block bg-red-600 text-white text-xs px-2 rounded-full">0</span>
+</a>
+
+
+
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</header>
+
+
+  <main>
+<!-- Hero Section -->
+<section class="hero">
+  <video autoplay muted loop class="hero-video">
+    <source src="video/video 2.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <div class="hero-content">
+ <h1>Welcome to KnifeXpert</h1>
+    <p>Explore Premium Knives for Every Purpose</p>
+    <a href="products.html" class="btn">Shop Now</a>
+  </div>
+</section>
+
+<!-- Intro Section -->
+<section class="home-intro">
+  <h2>Master the Art of Precision with KnifeXpert</h2>
+
+  <p>Your trusted source for premium knives and cutlery.</p>
+</section>
+
+    <!-- Featured Items Section -->
+    <section class="featured-items">
+  <h2>Featured Items</h2>
+  <div class="featured-grid">
+
+    <div class="product-card">
+      <img src="images/chef knife.jpg" alt="Chef Knife" />
+      <h3>Chef Knife</h3>
+      <p>High-quality stainless steel chef knife for all your cooking needs.</p>
+      <button class="btn">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="images/boning knife.jpg" alt="Boning Knife" />
+      <h3>Boning Knife</h3>
+      <p>Compact and durable boning knife perfect for outdoor adventures.</p>
+      <button class="btn">Add to Cart</button>
+    </div>
+
+    <div class="product-card">
+      <img src="images/su knife.jpg" alt="Hunting Knife" />
+      <h3>Hunting Knife</h3>
+      <p>Reliable and sharp hunting knife built for tough conditions.</p>
+      <button class="btn">Add to Cart</button>
+    </div>
+
+  </div>
+</section>
+
+
+   <!-- Newsletter Subscription -->
+<section class="newsletter-section">
+  <div class="newsletter-container">
+    <h3>🗡️ Stay Sharp – Join Our Newsletter</h3>
+    <p>Get the latest updates, exclusive offers, and expert knife tips directly to your inbox.</p>
+    <form id="newsletterForm" onsubmit="subscribeNewsletter(event)">
+      <input
+        type="email"
+        id="newsletter-email"
+        placeholder="Enter your email address"
+        required
+      />
+      <button type="submit" class="btn">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+
+  </main>
+ <footer>
+    <div class="footer-content">
+
+      <div class="footer-contact">
+        <h4>Contact Us</h4>
+        <p>Email: <a href="mailto:contact@knifexpert.com">contact@knifexpert.com</a></p>
+        <p>Phone: +1 234 567 8900</p>
+      </div>
+
+      <div class="footer-map">
+        <h4>Our Location</h4>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.0866596697747!2d-122.41941518468158!3d37.77492977975982!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8085809c81f49007%3A0xb4a69a25a253e55b!2sSan+Francisco%2C+CA%2C+USA!5e0!3m2!1sen!2s!4v1685279549114!5m2!1sen!2s"
+          width="250"
+          height="150"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+
+      <div class="footer-social">
+        <h4>Follow Us</h4>
+        <a href="#" aria-label="Facebook" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" aria-label="Twitter" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+        <a href="#" aria-label="Instagram" class="social-icon instagram"><i class="fab fa-instagram"></i></a>
+        <a href="#" aria-label="LinkedIn" class="social-icon linkedin"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    
+    </div>
+
+    <!-- New Footer Sections for Policies & Customer Service -->
+    <div class="footer-bottom">
+      <div class="footer-policies">
+        <h4>Policies</h4>
+        <ul>
+          <li><a href="refund-policy.html">Refund Policy</a></li>
+          <li><a href="warranty-policy.html">Warranty Policy</a></li>
+          <li><a href="privacy-policy.html">Payment and Privacy Policy</a></li>
+          <li><a href="terms.html">Terms and Conditions</a></li>
+        </ul>
+      </div>
+
+     <div class="footer-customer-service">
+  <h4>Customer Service</h4>
+  <ul>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="track-order.html">Track Order</a></li>
+    <li><a href="blogs.html">Blogs</a></li>
+  </ul>
+</div>
+
+    </div>
+
+    <p class="footer-copy">&copy; 2025 KnifeXpert. All rights reserved.</p>
+  </footer>
+
+
+
+  <script src="script.js"> </script>
+
+</body>
+</html>

@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KnifeXpert - Checkout</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+    }
+    .checkout-form, .order-summary {
+      background: white;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      flex: 1 1 45%;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+    .btn {
+      background: black;
+      color: white;
+      padding: 12px;
+      border: none;
+      width: 100%;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background: #333;
+    }
+    .order-item {
+      display: flex;
+      justify-content: space-between;
+      margin: 10px 0;
+    }
+    .total {
+      font-weight: bold;
+      font-size: 18px;
+      border-top: 1px solid #ddd;
+      padding-top: 10px;
+      margin-top: 10px;
+    }
+    @media(max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+    }
+    .empty-cart {
+      color: red;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header style="padding: 1rem; background: black; color: white; text-align: center;">
+    <h1>KnifeXpert - Secure Checkout</h1>
+  </header>
+
+  <main class="container">
+
+    <!-- Checkout Form -->
+    <section class="checkout-form">
+      <h2>Billing & Shipping Information</h2>
+      <form id="checkoutForm">
+        <label>Full Name</label>
+        <input type="text" id="fullName" required>
+
+        <label>Email Address</label>
+        <input type="email" id="email" required>
+
+        <label>Phone Number</label>
+        <input type="tel" id="phone" required>
+
+        <label>Address</label>
+        <textarea id="address" rows="3" required></textarea>
+
+        <label>City</label>
+        <input type="text" id="city" required>
+
+        <label>Country</label>
+        <select id="country" required>
+          <option>Pakistan</option>
+          <option>USA</option>
+          <option>UK</option>
+          <option>Other</option>
+        </select>
+
+        <label>ZIP / Postal Code</label>
+        <input type="text" id="zip" required>
+
+        <h3>Payment Method</h3>
+<select id="paymentMethod" onchange="showPaymentFields()">
+  <option value="cod">Cash on Delivery</option>
+  <option value="card">Credit Card</option>
+  <option value="wallet">JazzCash / EasyPaisa</option>
+  <option value="bank">Bank Transfer / Payoneer</option>
+</select>
+<!-- 🔻 Add this below dropdown -->
+<div id="paymentDetails"></div>
+
+  
+
+
+
+<!-- ✅ Terms checkbox goes here -->
+  <div class="terms-checkbox">
+    <input type="checkbox" id="agreeTerms" required>
+    <label for="agreeTerms">
+      I agree to the 
+      <a href="terms.html" target="_blank">Terms & Conditions</a> 
+      and Privacy Policy.
+    </label>
+  </div>
+   <!-- ✅ Place the promo code field HERE -->
+<label for="promoCode">Promo Code</label>
+<input type="text" id="promoCode" placeholder="Enter discount code (e.g. KNIFE10)">
+
+
+        <button class="btn" type="submit">Place Order</button>
+      </form>
+    </section>
+
+   <section class="order-summary">
+  <h2>Your Order</h2>
+  <div id="orderItems" class="order-items"></div>
+
+  <div class="price-summary" style="margin-top: 1rem; padding: 1rem; background: #f9f9f9; border-radius: 8px; box-shadow: 0 0 5px rgba(0,0,0,0.05);">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+      <span>Subtotal</span>
+      <span id="subtotalAmount">$0.00</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+      <span>Shipping</span>
+      <span>$0.89</span>
+    </div>
+    <div class="total" style="display: flex; justify-content: space-between; font-weight: bold; border-top: 1px solid #ccc; padding-top: 8px; font-size: 16px;">
+      <span>Total</span>
+      <span id="totalAmount">$0.00</span>
+    </div>
+    <div class="delivery-date" style="margin-top: 10px; font-size: 14px;">
+      <strong>Estimated Delivery:</strong> <span id="deliveryEstimate">Calculating...</span>
+    </div>
+  </div>
+</section>
+
+
+  </main>
+
+  <footer style="text-align:center; padding: 1rem; background: #222; color: white;">
+    &copy; 2025 KnifeXpert. All Rights Reserved.
+  </footer>
+
+  <script>
+  const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+  const orderItems = document.getElementById("orderItems");
+  const subtotalElem = document.getElementById("subtotalAmount");
+  const totalElem = document.getElementById("totalAmount");
+  const promoCodeInput = document.getElementById("promoCode");
+
+  let totalUSD = 0;
+  const shippingUSD = 0.89;
+  let discount = 0;
+
+  if (cartItems.length > 0) {
+    cartItems.forEach(item => {
+      const quantity = item.quantity || 1;
+      const itemTotal = item.price * quantity;
+      totalUSD += itemTotal;
+
+      orderItems.innerHTML += `
+        <div class="order-item" style="display: flex; gap: 10px; margin-bottom: 12px;">
+          <img src="${item.image}" alt="${item.name}" style="width: 80px; height: 80px; border-radius: 8px; object-fit: cover;">
+          <div style="flex: 1;">
+            <strong>${item.name}</strong><br>
+            <small>${item.description}</small><br>
+            <small>Quantity: ${quantity}</small>
+          </div>
+          <div style="font-weight: bold;">$${itemTotal.toFixed(2)}</div>
+        </div>
+      `;
+    });
+
+    subtotalElem.innerText = `$${totalUSD.toFixed(2)}`;
+
+    // Promo Code check
+    const promoCode = promoCodeInput?.value.trim().toUpperCase();
+    if (promoCode === "KNIFE10") {
+      discount = totalUSD * 0.10;
+      totalUSD -= discount;
+      orderItems.innerHTML += `
+        <div class="order-item"><span>Discount</span><span>-$${discount.toFixed(2)}</span></div>
+      `;
+    }
+
+    orderItems.innerHTML += `
+      <div class="order-item"><span>Shipping</span><span>$${shippingUSD.toFixed(2)}</span></div>
+    `;
+
+    totalElem.innerText = `$${(totalUSD + shippingUSD).toFixed(2)}`;
+  } else {
+    orderItems.innerHTML = `<p class="empty-cart">Your cart is empty. Go back and add products.</p>`;
+    subtotalElem.innerText = `$0.00`;
+    totalElem.innerText = `$0.00`;
+  }
+
+  // Show Payment Fields
+  function showPaymentFields() {
+    const method = document.getElementById("paymentMethod").value;
+    const detailsDiv = document.getElementById("paymentDetails");
+    let html = "";
+
+    if (method === "wallet") {
+      html = `
+        <label>Wallet Account Number</label>
+        <input type="text" id="walletNumber" placeholder="03XXXXXXXXX" required>
+      `;
+    } else if (method === "card") {
+      html = `
+        <label>Card Number</label>
+        <input type="text" id="cardNumber" placeholder="1234-5678-9012-3456" required>
+
+        <label>Expiry Date</label>
+        <input type="text" id="expiry" placeholder="MM/YY" required>
+
+        <label>CVV</label>
+        <input type="password" id="cvv" placeholder="123" required>
+      `;
+    } else if (method === "bank") {
+      html = `
+        <label>Account Holder Name</label>
+        <input type="text" id="accountName" placeholder="e.g. Maryam" required>
+
+        <label>Bank / Platform</label>
+        <input type="text" id="bankName" placeholder="e.g. Meezan, Payoneer" required>
+
+        <label>Account Number / IBAN</label>
+        <input type="text" id="accountNumber" placeholder="PK00XXXX00001234567890" required>
+      `;
+    } else {
+      html = `<p style="color: green; margin-top: 10px;">No extra info needed for Cash on Delivery.</p>`;
+    }
+
+    detailsDiv.innerHTML = html;
+  }
+
+  showPaymentFields();
+  document.getElementById("paymentMethod").addEventListener("change", showPaymentFields);
+
+  // Handle Form Submit
+  document.getElementById("checkoutForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const paymentMethod = document.getElementById("paymentMethod").value;
+
+    // Payment Info Validation
+    if (paymentMethod === "wallet" && !document.getElementById("walletNumber").value) {
+      alert("Please enter your Wallet number.");
+      return;
+    }
+
+    if (paymentMethod === "card") {
+      if (
+        !document.getElementById("cardNumber").value ||
+        !document.getElementById("expiry").value ||
+        !document.getElementById("cvv").value
+      ) {
+        alert("Please enter all credit card details.");
+        return;
+      }
+    }
+
+    if (paymentMethod === "bank") {
+      if (
+        !document.getElementById("accountName").value ||
+        !document.getElementById("bankName").value ||
+        !document.getElementById("accountNumber").value
+      ) {
+        alert("Please enter all bank account details.");
+        return;
+      }
+    }
+
+    // Terms checkbox
+    if (!document.getElementById("agreeTerms").checked) {
+      alert("Please agree to the Terms & Conditions before placing your order.");
+      return;
+    }
+
+    // Save customer info
+    const customer = {
+      fullName: document.getElementById("fullName").value.trim(),
+      email: document.getElementById("email").value.trim(),
+      phone: document.getElementById("phone").value.trim(),
+      address: document.getElementById("address").value.trim(),
+      city: document.getElementById("city").value.trim(),
+      country: document.getElementById("country").value,
+      zip: document.getElementById("zip").value.trim(),
+      paymentMethod: paymentMethod
+    };
+
+    localStorage.setItem("customerInfo", JSON.stringify(customer));
+
+    alert("✅ Your order has been placed successfully!");
+    window.location.href = "Thankyou.html";
+  });
+
+  // Delivery Estimate
+  window.onload = function () {
+    const today = new Date();
+    const min = new Date(today);
+    const max = new Date(today);
+    min.setDate(today.getDate() + 3);
+    max.setDate(today.getDate() + 6);
+
+    const options = { weekday: 'short', month: 'short', day: 'numeric' };
+    const el = document.getElementById("deliveryEstimate");
+    if (el) {
+      el.innerText = `${min.toLocaleDateString('en-US', options)} - ${max.toLocaleDateString('en-US', options)}`;
+    }
+  };
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KnifeXpert | Contact</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Add this inside <head> section of your HTML file -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+<body>
+
+  <header>
+    <div class="container nav">
+      <h1 class="logo">KnifeXpert</h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html" class="active">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <section class="contact-page">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <p>Have questions or feedback? Reach out to us!</p>
+      <form id="contactForm" onsubmit="submitContact(event)">
+        <input type="text" id="cf-name" placeholder="Your Name" required />
+        <input type="email" id="cf-email" placeholder="Your Email" required />
+        <textarea id="cf-message" placeholder="Your Message" required></textarea>
+        <button type="submit" class="btn">Send Message</button>
+        <p id="contact-status" class="status-message"></p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+  <div class="footer-content">
+
+    <div class="footer-contact">
+      <h4>Contact Us</h4>
+      <p>Email: <a href="mailto:contact@knifexpert.com">contact@knifexpert.com</a></p>
+      <p>Phone: +1 234 567 8900</p>
+    </div>
+
+    <div class="footer-social">
+  <h4>Follow Us</h4>
+  <a href="#" class="social-icon facebook" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+  <a href="#" class="social-icon twitter" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+  <a href="#" class="social-icon instagram" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+  <a href="#" class="social-icon linkedin" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+</div>
+
+
+  </div>
+
+  <!-- Footer Bottom Sections -->
+  <div class="footer-bottom">
+    <div class="footer-policies">
+      <h4>Policies</h4>
+      <ul>
+        <li><a href="#">Refund Policy</a></li>
+        <li><a href="#">Warranty Policy</a></li>
+        <li><a href="#">Payment and Privacy Policy</a></li>
+        <li><a href="#">Terms and Conditions</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-customer-service">
+      <h4>Customer Service</h4>
+      <ul>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Track Your Order</a></li>
+       <a href="blogs.html">Blogs</a>
+      </ul>
+    </div>
+  </div>
+
+  <p class="footer-copy">&copy; 2025 KnifeXpert. All rights reserved.</p>
+</footer>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
